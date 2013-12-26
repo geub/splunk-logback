@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #comentario
 /bin
 /bin/.*
@@ -15,10 +16,15 @@
 /\.idea/*
 /\.idea
 =======
+=======
+>>>>>>> 279c9ac0bf995eaece6cd26a655e1c84e8ccdc30
 *.class
 
 # Package Files #
 *.jar
 *.war
 *.ear
+<<<<<<< HEAD
 >>>>>>> de8a39a5f1abd61bae8477deb1737cc767741d8e
+=======
+>>>>>>> 279c9ac0bf995eaece6cd26a655e1c84e8ccdc30
