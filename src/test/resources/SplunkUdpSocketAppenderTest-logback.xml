@@ -1,0 +1,24 @@
+<configuration scan="true" debug="true">
+
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{dd/MM/yy HH:mm:ss.SSS} [%thread] %level %logger{36}:%line - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<root level="INFO">
+		<appender-ref ref="CONSOLE" />
+	</root>
+
+	<appender name="SPLUNK_TCP_APPENDER" class="com.github.geub.splunk.logback.appender.SplunkUdpSocketAppender">
+    	<port>10997</port>
+    	<host>localhost</host>
+    	<encoder>
+			<pattern>%msg</pattern>
+		</encoder>
+	</appender>
+	
+	<root level="INFO">
+		<appender-ref ref="SPLUNK_TCP_APPENDER" />
+	</root>
+</configuration>

@@ -1,0 +1,24 @@
+<<<<<<< HEAD
+#comentario
+/bin
+/bin/.*
+/target/
+/target/.*
+/target-deploy/
+/target-deploy/.*
+/\.settings/
+/\.settings/.*
+/\.classpath
+\Q/src/main/resources/rebel.xml\E
+/src/main/resources/rebel.xml
+/rebel.xml
+/\.idea/*
+/\.idea
+=======
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+>>>>>>> de8a39a5f1abd61bae8477deb1737cc767741d8e
