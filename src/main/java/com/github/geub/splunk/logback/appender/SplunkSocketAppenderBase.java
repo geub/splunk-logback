@@ -11,34 +11,34 @@ import ch.qos.logback.core.encoder.LayoutWrappingEncoder;
 
 abstract class SplunkSocketAppenderBase extends OutputStreamAppender<ILoggingEvent> {
 
-	private String host;
-	private int port;
+    private String host;
+    private int port;
 
-	@Override
-	public void start() {
-		try {
-			setOutputStream(createSocketOutputStream(this.host, this.port));
-			configEncoderToUtf8IfNecessary();
-			super.start();
-		} catch (IOException e) {
-			addError("Could not create socket channel", e);
-		}
-	}
+    @Override
+    public void start() {
+        try {
+            setOutputStream(createSocketOutputStream(this.host, this.port));
+            configEncoderToUtf8IfNecessary();
+            super.start();
+        } catch (IOException e) {
+            addError("Could not create socket channel", e);
+        }
+    }
 
-	protected void configEncoderToUtf8IfNecessary() {
-		Encoder<ILoggingEvent> layoutWrappingEncoder = getEncoder();
-		if (layoutWrappingEncoder instanceof LayoutWrappingEncoder<?>) {
-			((LayoutWrappingEncoder<?>) layoutWrappingEncoder).setCharset(Charset.forName("UTF-8"));
-		}
-	}
+    protected void configEncoderToUtf8IfNecessary() {
+        Encoder<ILoggingEvent> layoutWrappingEncoder = getEncoder();
+        if (layoutWrappingEncoder instanceof LayoutWrappingEncoder<?>) {
+            ((LayoutWrappingEncoder<?>) layoutWrappingEncoder).setCharset(Charset.forName("UTF-8"));
+        }
+    }
 
-	protected abstract OutputStream createSocketOutputStream(String hostValue, int portValue) throws IOException;
+    protected abstract OutputStream createSocketOutputStream(String hostValue, int portValue) throws IOException;
 
-	public void setHost(String host) {
-		this.host = host;
-	}
+    public void setHost(String host) {
+        this.host = host;
+    }
 
-	public void setPort(int port) {
-		this.port = port;
-	}
+    public void setPort(int port) {
+        this.port = port;
+    }
 }
