@@ -38,7 +38,7 @@ public class SplunkUdpSocketAppenderTest {
         new ContextInitializer(context).configureByResource(getClass().getResource("/SplunkUdpSocketAppenderTest-logback.xml"));
         String uuid = UUID.randomUUID().toString();
         context.getLogger(getClass()).info(uuid);
-        Assert.assertEquals("Valor do log incorreto", uuid, future.get());
+        Assert.assertEquals("Wrong value", uuid, future.get());
     }
 
 }
