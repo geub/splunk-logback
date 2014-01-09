@@ -47,5 +47,7 @@ Configuration
 Release
 -------
 
-* 1.0.0-0
+* 1.0.0
     - Initial project
+* 1.0.1
+    - Included log limit

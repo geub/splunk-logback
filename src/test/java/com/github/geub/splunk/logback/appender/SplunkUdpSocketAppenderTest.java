@@ -27,6 +27,7 @@ public class SplunkUdpSocketAppenderTest {
             DatagramPacket incoming = new DatagramPacket(buffer, buffer.length);
             sock.receive(incoming);
             byte[] data = incoming.getData();
+            sock.close();
             return new String(data, 0, incoming.getLength());
         }
     };

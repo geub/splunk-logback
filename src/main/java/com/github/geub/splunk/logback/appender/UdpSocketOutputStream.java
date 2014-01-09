@@ -1,5 +1,8 @@
 package com.github.geub.splunk.logback.appender;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
@@ -9,8 +12,11 @@ import java.nio.channels.DatagramChannel;
 
 class UdpSocketOutputStream extends OutputStream {
 
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
     private DatagramChannel datagramChannel;
     private SocketAddress socketAddress;
+    protected static final int UDP_MAX_LENGTH_IN_BYTES = 65500;
 
     public UdpSocketOutputStream(String host, int port) throws IOException {
         this.datagramChannel = DatagramChannel.open();
@@ -24,7 +30,17 @@ class UdpSocketOutputStream extends OutputStream {
 
     @Override
     public void write(byte[] b, int off, int len) throws IOException {
-        this.datagramChannel.send(ByteBuffer.wrap(b, off, len), this.socketAddress);
+        int bytesLengthToWrite = truncateBytesLengthToMaxSizeAllowedForUdp(len);
+        ByteBuffer wrap = ByteBuffer.wrap(b, off, bytesLengthToWrite);
+        this.datagramChannel.send(wrap, this.socketAddress);
+    }
+
+    private int truncateBytesLengthToMaxSizeAllowedForUdp(int len) {
+        if(len > UDP_MAX_LENGTH_IN_BYTES) {
+            logger.warn("Line truncated");
+            return UDP_MAX_LENGTH_IN_BYTES;
+        }
+        return len;
     }
 
     @Override
