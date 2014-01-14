@@ -1,4 +1,4 @@
-splunk-logback
+splunk-logback [![Build Status](https://travis-ci.org/geub/splunk-logback.png?branch=master)](https://travis-ci.org/geub/splunk-logback)
 ==============
 
 Logback appender to send log events to splunk
