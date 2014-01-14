@@ -48,6 +48,8 @@ Release
 -------
 
 * 1.0.0
-    - Initial project
+    - Initial project.
 * 1.0.1
-    - Included log limit
+    - Included log limit.
+* 1.0.2-SNAPSHOT
+    - Included travis.
