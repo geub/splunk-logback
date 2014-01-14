@@ -5,9 +5,9 @@ import java.io.OutputStream;
 
 public class SplunkUdpSocketAppender extends SplunkSocketAppenderBase {
 
-	@Override
-	protected OutputStream createSocketOutputStream(String host, int port) throws IOException {
-		return new UdpSocketOutputStream(host, port);
-	}
+    @Override
+    protected OutputStream createSocketOutputStream(String host, int port) throws IOException {
+        return new UdpSocketOutputStream(host, port);
+    }
 
 }

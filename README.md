@@ -6,7 +6,8 @@ Logback appender to send log events to splunk
 Requirements
 ------------
 
-* logback-classic version 1.0.13
+* logback-classic-1.0.13
+* splunk-1.2.0
 
 Configuration
 -------------
@@ -42,3 +43,11 @@ Configuration
             <appender-ref ref="SPLUNK_TCP_APPENDER" />
         </root>
     </configuration>
+
+Release
+-------
+
+* 1.0.0
+    - Initial project
+* 1.0.1
+    - Included log limit

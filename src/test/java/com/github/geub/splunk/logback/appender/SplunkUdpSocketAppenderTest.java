@@ -17,31 +17,29 @@ import ch.qos.logback.core.util.ExecutorServiceUtil;
 
 public class SplunkUdpSocketAppenderTest {
 
-	private static final int UDP_PORT = 10997;
+    private static final int UDP_PORT = 10997;
 
-	private Callable<String> task = new Callable<String>() {
-		@Override
-		public String call() throws Exception {
-			DatagramSocket sock = null;
-			sock = new DatagramSocket(SplunkUdpSocketAppenderTest.UDP_PORT);
-			byte[] buffer = new byte[65536];
-			DatagramPacket incoming = new DatagramPacket(buffer, buffer.length);
-			while (true) {
-				sock.receive(incoming);
-				byte[] data = incoming.getData();
-				return new String(data, 0, incoming.getLength());
-			}
-		}
-	};
+    private Callable<String> task = new Callable<String>() {
+        @Override
+        public String call() throws Exception {
+            DatagramSocket sock = new DatagramSocket(SplunkUdpSocketAppenderTest.UDP_PORT);
+            byte[] buffer = new byte[65536];
+            DatagramPacket incoming = new DatagramPacket(buffer, buffer.length);
+            sock.receive(incoming);
+            byte[] data = incoming.getData();
+            sock.close();
+            return new String(data, 0, incoming.getLength());
+        }
+    };
 
-	@Test
-	public void testSuccesfullySendMessage() throws JoranException, InterruptedException, ExecutionException {
-		Future<String> future = ExecutorServiceUtil.newExecutorService().submit(this.task);
-		LoggerContext context = new LoggerContext();
-		new ContextInitializer(context).configureByResource(getClass().getResource("/SplunkUdpSocketAppenderTest-logback.xml"));
-		String uuid = UUID.randomUUID().toString();
-		context.getLogger(getClass()).info(uuid);
-		Assert.assertEquals("Valor do log incorreto", uuid, future.get());
-	}
+    @Test
+    public void testSuccesfullySendMessage() throws JoranException, InterruptedException, ExecutionException {
+        Future<String> future = ExecutorServiceUtil.newExecutorService().submit(this.task);
+        LoggerContext context = new LoggerContext();
+        new ContextInitializer(context).configureByResource(getClass().getResource("/SplunkUdpSocketAppenderTest-logback.xml"));
+        String uuid = UUID.randomUUID().toString();
+        context.getLogger(getClass()).info(uuid);
+        Assert.assertEquals("Wrong value", uuid, future.get());
+    }
 
 }
